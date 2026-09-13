@@ -1,0 +1,20 @@
+# Python environment / secrets
+Medibot/.env
+Medibot/.venv/
+Medibot/**/__pycache__/
+Medibot/**/*.pyc
+
+# Local generated data
+Medibot/qdrant_data_all/
+Medibot/qdrant_data_hybrid/
+
+# Frontend generated folders
+Medibot/Frontend/**/node_modules/
+Medibot/Frontend/**/.next/
+
+# Working / old Python files in Medibot root
+Medibot/*.py
+
+# Assignment resource copies
+Medibot_Assignment_Resources/
+Medibot_Assignment_Resources.zip
