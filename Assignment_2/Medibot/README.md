@@ -130,7 +130,7 @@ The UI provides login, role display, chat, follow-up questions, RBAC refusal mes
 
 ```text
 Medibot/
-├── backend/
+├── Backend/
 │   ├── __init__.py
 │   ├── app.py
 │   ├── ingestion_5_layout_aware.py
@@ -174,13 +174,13 @@ Do not commit `.env` or API keys.
 ### Build the vector index
 
 ```bash
-uv run python backend/ingestion_5_layout_aware.py
+uv run python Backend/ingestion_5_layout_aware.py
 ```
 
 ### Run FastAPI
 
 ```bash
-uv run uvicorn backend.app:app
+uv run uvicorn Backend.app:app
 ```
 
 Swagger is available at `http://127.0.0.1:8000/docs`.
