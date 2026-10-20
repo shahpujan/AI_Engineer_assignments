@@ -1,0 +1,81 @@
+test_id,role,key,score,comment
+MED-001,doctor,answer_not_empty,1.0,Answer present
+MED-001,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-001,doctor,response_within_latency,1.0,Latency 2.17s; limit 15s
+MED-001,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-002,doctor,answer_not_empty,1.0,Answer present
+MED-002,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-002,doctor,response_within_latency,1.0,Latency 0.98s; limit 15s
+MED-002,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-003,doctor,answer_not_empty,1.0,Answer present
+MED-003,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-003,doctor,response_within_latency,1.0,Latency 1.49s; limit 15s
+MED-003,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-004,doctor,answer_not_empty,1.0,Answer present
+MED-004,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-004,doctor,response_within_latency,1.0,Latency 0.88s; limit 15s
+MED-004,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-005,doctor,answer_not_empty,1.0,Answer present
+MED-005,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-005,doctor,response_within_latency,1.0,Latency 1.54s; limit 15s
+MED-005,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-006,doctor,answer_not_empty,1.0,Answer present
+MED-006,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-006,doctor,response_within_latency,1.0,Latency 1.04s; limit 15s
+MED-006,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-007,nurse,answer_not_empty,1.0,Answer present
+MED-007,nurse,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-007,nurse,response_within_latency,1.0,Latency 0.67s; limit 15s
+MED-007,nurse,restricted_role_access,1.0,All source collections permitted for nurse
+MED-008,nurse,answer_not_empty,1.0,Answer present
+MED-008,nurse,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-008,nurse,response_within_latency,1.0,Latency 0.77s; limit 15s
+MED-008,nurse,restricted_role_access,1.0,All source collections permitted for nurse
+MED-009,nurse,answer_not_empty,1.0,Answer present
+MED-009,nurse,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-009,nurse,response_within_latency,1.0,Latency 1.21s; limit 15s
+MED-009,nurse,restricted_role_access,1.0,All source collections permitted for nurse
+MED-010,billing_executive,answer_not_empty,1.0,Answer present
+MED-010,billing_executive,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-010,billing_executive,response_within_latency,1.0,Latency 1.87s; limit 15s
+MED-010,billing_executive,restricted_role_access,1.0,All source collections permitted for billing_executive
+MED-011,billing_executive,answer_not_empty,1.0,Answer present
+MED-011,billing_executive,citation_present,,N/A: refusal response does not require a citation
+MED-011,billing_executive,response_within_latency,1.0,Latency 2.05s; limit 15s
+MED-011,billing_executive,restricted_role_access,,N/A: no source metadata available to verify RBAC
+MED-012,billing_executive,answer_not_empty,1.0,Answer present
+MED-012,billing_executive,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-012,billing_executive,response_within_latency,1.0,Latency 1.16s; limit 15s
+MED-012,billing_executive,restricted_role_access,1.0,All source collections permitted for billing_executive
+MED-013,technician,answer_not_empty,1.0,Answer present
+MED-013,technician,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-013,technician,response_within_latency,1.0,Latency 0.91s; limit 15s
+MED-013,technician,restricted_role_access,1.0,All source collections permitted for technician
+MED-014,technician,answer_not_empty,1.0,Answer present
+MED-014,technician,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-014,technician,response_within_latency,1.0,Latency 1.45s; limit 15s
+MED-014,technician,restricted_role_access,1.0,All source collections permitted for technician
+MED-015,technician,answer_not_empty,1.0,Answer present
+MED-015,technician,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-015,technician,response_within_latency,1.0,Latency 0.94s; limit 15s
+MED-015,technician,restricted_role_access,1.0,All source collections permitted for technician
+MED-016,admin,answer_not_empty,1.0,Answer present
+MED-016,admin,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-016,admin,response_within_latency,1.0,Latency 1.47s; limit 15s
+MED-016,admin,restricted_role_access,1.0,All source collections permitted for admin
+MED-017,nurse,answer_not_empty,1.0,Answer present
+MED-017,nurse,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-017,nurse,response_within_latency,1.0,Latency 0.62s; limit 15s
+MED-017,nurse,restricted_role_access,1.0,All source collections permitted for nurse
+MED-018,doctor,answer_not_empty,1.0,Answer present
+MED-018,doctor,citation_present,0.0,Missing explicit [Source: ...] citation
+MED-018,doctor,response_within_latency,1.0,Latency 1.85s; limit 15s
+MED-018,doctor,restricted_role_access,1.0,All source collections permitted for doctor
+MED-019,doctor,answer_not_empty,1.0,Answer present
+MED-019,doctor,citation_present,,N/A: refusal response does not require a citation
+MED-019,doctor,response_within_latency,1.0,Latency 1.17s; limit 15s
+MED-019,doctor,restricted_role_access,,N/A: no source metadata available to verify RBAC
+MED-020,doctor,answer_not_empty,1.0,Answer present
+MED-020,doctor,citation_present,,N/A: refusal response does not require a citation
+MED-020,doctor,response_within_latency,1.0,Latency 0.79s; limit 15s
+MED-020,doctor,restricted_role_access,,N/A: no source metadata available to verify RBAC
