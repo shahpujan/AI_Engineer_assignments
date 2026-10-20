@@ -36,7 +36,16 @@ These enhancements demonstrate the progression of MediBot from a role-aware Hybr
 - **Observability:** LangSmith request traces, including guardrail decisions, retrieval and generation spans, latency, and token usage.
 - **Evaluation:** RAGAS, custom LLM judge, and deterministic Python checks.
 
-**Target repository:** This pipeline is integrated into the MediBot repository. If publishing the target chatbot separately, add its link here: `[MediBot repository](REPLACE_WITH_REPOSITORY_URL)`.
+### Target Chatbot
+
+This evaluation pipeline is integrated into my existing **MediBot Hybrid RAG application**, developed as part of the previous AI Engineering assignment.
+
+Both the original MediBot application and the Evaluation & Guardrail Pipeline are maintained in the same GitHub repository.
+
+- **Original application:** `Backend/app.py`
+- **Guardrail-enabled application:** `Backend/app_1.py`
+- **Evaluation pipeline:** `Backend/evaluation/`
+- **Guardrail implementation:** `Backend/guardrails/`
 
 ### Guardrail Integration — `app_1.py`
 
