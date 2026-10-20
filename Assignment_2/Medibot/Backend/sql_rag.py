@@ -7,13 +7,26 @@ from langchain_groq import ChatGroq
 from langchain_community.utilities import SQLDatabase
 from langchain_classic.chains import create_sql_query_chain
 from langchain_core.prompts import ChatPromptTemplate
+from pathlib import Path
 
 
 # -------------------------------------------------------
 # Step 1: Configuration
 # -------------------------------------------------------
 
-DB_PATH = "mediassist_data/db/mediassist.db"
+#DB_PATH = "mediassist_data/db/mediassist.db"
+BACKEND_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BACKEND_DIR.parent
+
+DB_PATH = (
+    PROJECT_DIR
+    / "mediassist_data"
+    / "db"
+    / "mediassist.db"
+)
+
+print("SQLite DB path:", DB_PATH)
+print("SQLite DB exists:", DB_PATH.exists())
 
 load_dotenv()
 

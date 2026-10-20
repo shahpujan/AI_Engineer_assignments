@@ -21,14 +21,22 @@ from transformers import AutoTokenizer
 from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
+from qdrant_client import QdrantClient
 
+import re
 
 # ============================================================
 # 1. CONFIG
 # ============================================================
 
-DATA_ROOT = Path("mediassist_data")
-QDRANT_PATH = "./qdrant_data_hybrid"
+BACKEND_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BACKEND_DIR.parent
+
+DATA_ROOT = PROJECT_DIR / "mediassist_data"
+
+QDRANT_PATH = str(PROJECT_DIR / "qdrant_data_hybrid")
+#DATA_ROOT = Path("mediassist_data")
+#QDRANT_PATH = "./qdrant_data_hybrid"
 QDRANT_COLLECTION_NAME = "mediassist_docs"
 EMBED_MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2"
 MAX_TOKENS = 800
@@ -226,6 +234,49 @@ def make_document(file_path: Path, collection: str, doc_chunk: Any) -> Document 
         metadata=metadata,
     )
 
+import re
+
+
+def add_parent_section_context(
+    documents: list[Document],
+) -> list[Document]:
+    """
+    Propagate the current major section heading
+    into its child chunks to preserve hierarchy.
+    """
+
+    current_parent = None
+
+    major_section_pattern = re.compile(
+        r"^[A-Z]\.\s+.+"
+    )
+
+    for document in documents:
+
+        section_title = document.metadata.get(
+            "section_title",
+            ""
+        )
+
+        # New major section found
+        if major_section_pattern.match(section_title):
+            current_parent = section_title
+            continue
+
+        # Add current parent to child chunks
+        if current_parent:
+
+            document.page_content = (
+                f"{current_parent}\n"
+                f"> {document.page_content}"
+            )
+
+            document.metadata["parent_section"] = (
+                current_parent
+            )
+
+    return documents
+
 
 # ============================================================
 # 4. PROCESS FILES
@@ -245,12 +296,25 @@ def process_file(converter: DocumentConverter, file_path: Path) -> list[Document
     doc_chunks = list(chunker.chunk(dl_doc=dl_doc))
     print(f"Hybrid chunks before conversion: {len(doc_chunks)}")
 
+    # if file_path.name == "treatment_protocols.pdf":
+    #     print("\n========== TREATMENT PROTOCOL CHUNKS ==========")
+
+    #     for i, doc_chunk in enumerate(doc_chunks):
+    #         text = contextualize_chunk(doc_chunk)
+
+    #         print(f"\n----- RAW CHUNK {i} -----")
+    #         print("Headings:", get_headings(doc_chunk))
+    #         print(text[:2000])  
+
     documents: list[Document] = []
 
     for doc_chunk in doc_chunks:
         document = make_document(file_path, collection, doc_chunk)
         if document is not None:
             documents.append(document)
+    # Add parent section context to clinical protocol chunks
+    if file_path.name == "treatment_protocols.pdf":
+        documents = add_parent_section_context(documents)
 
     print(f"Final LangChain documents: {len(documents)}")
     return documents
@@ -305,6 +369,26 @@ def ingest_documents(documents: list[Document]) -> None:
 
     print(f"\nStoring {len(documents)} documents in Qdrant...")
 
+
+    # --------------------------------------------------
+    # Remove previous collection before full re-ingestion
+    # --------------------------------------------------
+
+    client = QdrantClient(path=QDRANT_PATH)
+
+    if client.collection_exists(QDRANT_COLLECTION_NAME):
+        print(
+            f"Deleting existing collection: "
+            f"{QDRANT_COLLECTION_NAME}"
+        )
+
+        client.delete_collection(collection_name=QDRANT_COLLECTION_NAME)
+    client.close()
+
+    # --------------------------------------------------
+    # Create fresh collection and ingest current chunks
+    # --------------------------------------------------
+
     QdrantVectorStore.from_documents(
         documents=documents,
         embedding=embedder,
@@ -340,8 +424,10 @@ def main() -> None:
     print(f"\nTotal documents/chunks prepared: {len(all_documents)}")
 
     # Current billing-table diagnostic.
-    print_matching_chunks(all_documents, "E11.9")
-    print_matching_chunks(all_documents, "Type 2 diabetes w/o complications")
+    #print_matching_chunks(all_documents, "E11.9")
+    #print_matching_chunks(all_documents, "Type 2 diabetes w/o complications")
+    #print_matching_chunks(all_documents, "Hypertension")
+
 
     ingest_documents(all_documents)
 

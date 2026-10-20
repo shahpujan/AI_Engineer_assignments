@@ -38,12 +38,20 @@ from langchain_community.cross_encoders import (
     HuggingFaceCrossEncoder
 )
 
+from pathlib import Path
+
+
 
 # -------------------------------------------------------
 # Step 1: Configuration
 # -------------------------------------------------------
 
-QDRANT_PATH = "./qdrant_data_hybrid"
+BACKEND_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BACKEND_DIR.parent
+
+QDRANT_PATH = str(
+    PROJECT_DIR / "qdrant_data_hybrid"
+)
 
 QDRANT_COLLECTION_NAME = "mediassist_docs"
 
@@ -658,6 +666,13 @@ def hybrid_rag(
     return {
         "answer": result["answer"],
         "sources": sources,
+        #Added for incorporating evals#
+        #-------------------------------
+        "contexts": [
+        doc.page_content
+        for doc in result["context"]
+    ],
+        
     }
 
 
