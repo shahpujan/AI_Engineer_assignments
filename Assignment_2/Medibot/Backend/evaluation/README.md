@@ -205,7 +205,7 @@ The evaluation runner loads `.env` from the MediBot repository root. Never commi
 4. Start the existing FastAPI application using the module and ASGI object configured in your project. If the application object is `app` in `Backend/app.py`, a typical command from `Backend/` is:
 
    ```bash
-   uv run uvicorn app:app --reload
+   uv run uvicorn app_1:app --reload
    ```
 
    Send test requests through the **actual application endpoint** to exercise the Bedrock guardrails. The precise endpoint and request body should be documented from `app.py`; do not treat the offline `hybrid_rag()` function as a substitute for application guardrail testing.
