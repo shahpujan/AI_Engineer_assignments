@@ -128,23 +128,34 @@ Consolidated evaluation_report.md
 Paths below reflect the existing MediBot backend and evaluation files. The frontend and any other application modules are omitted for clarity.
 
 ```text
-Medibot/
-├── .env                         # Local only; NEVER commit
-├── Backend/
-│   ├── app.py                   # FastAPI application and guardrail request path
-│   ├── retreival_rerank.py      # Hybrid RAG (existing module name)
-│   └── evaluation/
-│       ├── evaluation.py
-│       ├── heuristic_evals.py
-│       ├── llm_judge.py
-│       ├── medibot_ragas_test_cases.json
-│       ├── ragas_results.csv
-│       ├── ragas_aggregate_scores.csv
-│       ├── heuristic_results.csv
-│       ├── llm_judge_results.csv
-│       ├── evaluation_report.md
-│       └── evidence/           # LangSmith screenshots (when copied here)
-└── README.md
+Backend/
+├── app.py                         # Original MediBot application
+├── app_1.py                       # Guardrail-enabled MediBot application
+├── semantic_routing.py            # Semantic query routing
+├── retreival_rerank.py            # Hybrid retrieval and reranking
+├── sql_rag.py                     # SQL-based RAG
+│
+├── guardrails/
+│   ├── bedrock_guardrail.py       # AWS Bedrock Guardrail integration
+│   └── enforcement.py             # Input/output guardrail enforcement
+│
+└── evaluation/
+    ├── README.md                  # Evaluation assignment documentation
+    ├── evaluation.py              # RAGAS evaluation pipeline
+    ├── heuristic_evals.py         # Deterministic evaluation checks
+    ├── llm_judge.py               # LLM-as-a-Judge
+    ├── medibot_ragas_test_cases.json
+    ├── ragas_results.csv
+    ├── ragas_aggregate_scores.csv
+    ├── heuristic_results.csv
+    ├── llm_judge_results.csv
+    ├── evaluation_report.md
+    └── tests/                     # LangSmith evidence screenshots
+        ├── adversial_guardrail_2.png
+        ├── adversial_guardrail_check.png
+        ├── final_observability.png
+        ├── langsmith_latency.png
+        └── traceability.png
 ```
 
 ## Prerequisites and setup
