@@ -176,17 +176,31 @@ Backend/
 
 3. Configure the repository-root `.env`. **These are illustrative key names: check `app.py` and `evaluation.py` for the exact variables your implementation reads.**
 
-   ```dotenv
-   GROQ_API_KEY=your_groq_api_key
-   LANGCHAIN_TRACING_V2=true
-   LANGCHAIN_API_KEY=your_langsmith_api_key
-   LANGCHAIN_PROJECT=medibot-observability
-   AWS_DEFAULT_REGION=your_aws_region
-   # AWS credentials: use your normal AWS credential chain or configured profile
-   # Bedrock Guardrail identifier/version: set the names required by app.py
-   ```
+# Groq API Configuration
+GROQ_API_KEY=your_groq_api_key
 
-   The evaluation runner loads `.env` from the MediBot repository root. Never commit API keys, AWS credentials, or sensitive request/response content.
+# LangSmith Observability
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_api_key
+LANGCHAIN_PROJECT=medibot-observability
+
+# AWS Configuration
+AWS_DEFAULT_REGION=ap-southeast-2
+
+# AWS Bedrock Guardrails
+BEDROCK_GUARDRAIL_ID=your_guardrail_id
+BEDROCK_GUARDRAIL_VERSION=your_guardrail_version
+   ```
+Environment Variable Configuration
+- GROQ_API_KEY: Used for LLM inference and evaluation.
+- LANGCHAIN_TRACING_V2: Enables LangSmith tracing.
+- LANGCHAIN_API_KEY: Authenticates with LangSmith.
+- LANGCHAIN_PROJECT: Specifies the LangSmith project for MediBot traces.
+- AWS_DEFAULT_REGION: AWS region where the Bedrock Guardrail is configured.
+- BEDROCK_GUARDRAIL_ID: Identifier of the AWS Bedrock Guardrail.
+- BEDROCK_GUARDRAIL_VERSION: Guardrail version, such as DRAFT or a published version number.
+
+The evaluation runner loads `.env` from the MediBot repository root. Never commit API keys, AWS credentials, or sensitive request/response content.
 
 4. Start the existing FastAPI application using the module and ASGI object configured in your project. If the application object is `app` in `Backend/app.py`, a typical command from `Backend/` is:
 
